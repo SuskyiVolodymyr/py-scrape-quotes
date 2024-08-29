@@ -36,7 +36,7 @@ def fetch_page_content(page_url: str) -> bytes | None:
 
 
 def page_generator() -> Generator[BeautifulSoup, None, None]:
-    page_counter = 1
+    page_counter = 2
 
     while True:
         page_url = urljoin(BASE_URL, f"page/{page_counter}")
@@ -45,7 +45,9 @@ def page_generator() -> Generator[BeautifulSoup, None, None]:
         soup = BeautifulSoup(page_content, "html.parser")
 
         if not soup.select_one(".next"):
+            yield soup
             break
+
         yield soup
         page_counter += 1
 
