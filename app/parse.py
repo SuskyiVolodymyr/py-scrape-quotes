@@ -31,8 +31,8 @@ def fetch_page_content(page_url: str) -> bytes | None:
 
         return response.content
 
-    except requests.HTTPError:
-        return None
+    except requests.HTTPError as e:
+        return print(e)
 
 
 def page_generator() -> Generator[BeautifulSoup, None, None]:
